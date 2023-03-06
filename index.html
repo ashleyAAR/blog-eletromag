@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Magnoblog</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        html, body{
+            width:100vw;
+            height:100vh;
+            overflow-x:hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: #c5d9dd;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #7d9cbb;
+            border-radius: 4px;
+            border: 1px solid #5b7ea1;
+        }
+        .header{
+            width:100vw;
+            height:auto;
+        }
+        .header-menu{
+            position:relative;
+            display:flex;
+            height:78px;
+            background-color: rgb(255, 255, 255);
+        }
+        .menu-items{
+            display: flex;
+            justify-content:space-between;
+            padding:20px;
+            margin-left:10vw;
+            width:500px;
+        }
+        .menu-item{
+            list-style: none;
+        }
+        .menu-item-anchor{
+            display:inline-block;
+            text-decoration: none;
+            padding:14px 25px;
+            color:rgb(37, 136, 202);
+            font-weight:500;
+            border-radius: 16px;
+            transition: .5s;
+        }
+        .menu-item-anchor:hover{
+            background-color: rgb(247, 245, 245);
+            color: rgb(24, 145, 167);
+        }
+        #menu-items__open{
+            display:none;
+            position:absolute;
+            right:0%;
+            color:rgb(37, 136, 202);
+            height:64px;
+            padding:20px;
+        }
+        #menu-items__close{
+            display:none;
+            height:64px;
+            width:64px;
+            padding:20px;
+        }
+        #menu-items__open:hover, #menu-items__close:hover{
+            cursor:pointer;
+        }
+        .main-content{ 
+            height:auto;
+            background: url("img/desktop-background.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            object-fit: cover;
+        }
+        .main-title-area{
+            display:flex;
+            justify-content:right;
+            width:100vw;
+            height:20%;
+            padding:12%;
+        }     
+        .blog-main-title{
+            color:#8cbac9;
+            font-size:2.2em;
+            height:40px;
+            text-shadow:#2a3133 2px 2px 2px,
+                        #2a3133 2px 2px 2px,
+                        #2a3133 2px 2px 2px,
+                        #2a3133 2px 2px 2px,
+                        #2a3133 2px 2px 2px,
+                        #2a3133 2px 2px 2px;
+        }
+        .main-content-text-area{
+            height:1300px;
+            width:100vw;
+            padding: 4vw 20vw;
+        }  
+        .content-select-area,.content-select-area-value {
+            width:15vw;
+            padding:5px 0px;
+            border-radius: 7px;
+        }
+        .blog-main-content-title-select{
+            display:flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-right:20px;
+            height:116px;
+            margin-bottom: 10%;;
+        }
+        .content-select-area{
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #8cbac9;
+            padding:5px 10px;
+            width:16.4vw;
+            height:60px;
+        }
+        .content-select-area-title{
+            text-align: center;
+            padding-top:5px 0px;
+            font-weight:100;
+            font-size:1.01em;
+        }
+        .content-option-value, .content-select-area-value{
+            text-align: center;
+            font-size:1.0001em;
+        }
+        .content-option-value:hover, .content-select-area-value:hover{
+            cursor:pointer;
+        }
+        .content-select-area-value:focus{
+            outline: 0;
+        }
+        .blog-main-content{
+            text-align: justify;        
+        }
+        .content{
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-right:6px;
+            height: 970px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .physicist-title{
+            color:#8cbac9;
+            text-align: center;
+            font: bold 2em Arial;
+            text-shadow:#2a3133 2px 2px 2px,
+                        #2a3133 2px 2px 2px,
+                        #2a3133 2px 2px 2px;
+        }
+        .experiment-title{
+            color:rgb(117, 181, 192);
+            text-shadow:2px 2px 2px rgb(34, 54, 61),
+                        2px 2px 2px rgb(34, 54, 61),
+                        2px 2px 2px rgb(34, 54, 61),
+                        2px 2px 2px rgb(34, 54, 61);
+            margin-bottom:29px;
+        }
+        p{
+            text-indent: 25px;
+            margin-bottom:8px;
+            line-height: 25px;
+        }
+        .oersted-img-experiment{
+            width:60%;
+            margin:0px 20% 10px 20%;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.521);
+        }
+        .faraday-img-experiment{
+            width:auto;
+            margin: 0px 40% 10px 40%;
+        }
+        .oersted-img-area, .faraday-img-area, .lenz-img-area{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            margin:40px auto;
+        }
+        .lenz-img-experiment{
+            display:inline-block;
+            width:90%;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.521);
+            height:250px;
+            margin: 0px 5% 10px 5%;
+        }
+        .oersted-legend-experiment, .faraday-legend-experiment, .lenz-legend-experiment{
+            text-align: center;
+            font-style: italic;
+        }
+        .reference-paragraph{
+            text-align: center;
+            margin:40px 0px;
+        }
+        .reference-anchor{
+            display:block;
+            width:100%;
+        }
+        .audio-area{
+            display:flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height:80px;
+            width:80%;
+            padding-top: 10px;
+            margin:20px 10%;
+            border-radius: 28px;
+            background-color: #5b7ea1;
+            box-shadow:2px 2px 5px rgb(53, 53, 68);
+        }
+        .audio-controls{
+            width:100%;
+        }
+        h4{
+            text-align: center;
+            color:white;
+        }
+        @media only screen and (min-width:707px) and (max-width:1026px){
+            .main-content{
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+            .main-content-text-area{
+                height:886px;
+                width:100vw;
+            } 
+            .content-select-area,.content-select-area-value {
+                width:20vw;
+                padding-top:5px;
+            }
+            .content-select-area{
+                width:22vw;
+            }
+            .content{
+                height: 620px;
+            }
+            .physicist-title{
+                font-size:1.3em;
+            }
+        }
+
+        @media only screen and (max-width:706px){
+            .menu-items{
+                position:absolute;
+                left:100%;
+                flex-direction: column;
+                justify-content: flex-start;
+                background-color: white;
+                padding:64px 0px;
+                margin-left:0;
+                width:55vw;
+                height:100vh;
+                border: 1px solid rgba(0, 0, 0, 0.342);
+                transition: left .5s;
+                z-index:3;
+            }
+            #menu-items__open{
+                display:inline-block;
+            }
+            .menu-item-anchor{
+                display:inline-block;
+                padding:12px 32px;
+                width:100%;
+                text-align:center;
+                border-width: 0px 0px 0.5px 0px;
+                border-style: solid;
+                border-color: rgba(59, 54, 54, 0.363);
+                border-radius: 0%;
+            }
+            .main-content{  
+                background: url("./img/mobile-background.png") center top;
+                background-size: cover;
+                height:auto;
+                height:240px;
+            }
+            .main-title-area{
+                align-items: flex-end;
+                justify-content: right;
+                padding:10px;
+                width:100vw;
+                height:240px;
+            }
+            .main-content-text-area{
+                height:auto;
+                width:100vw;
+                background-color: white;
+                padding: 20px 20px;
+            }
+            .content-select-area,.content-select-area-value {
+                width:24vw;
+                padding-top:5px;
+            }
+            .content-select-area{
+                width:28vw;
+            }
+            .content-select-area-title, .content-select-area-value, .content-option-value{
+                font-size:0.96em;
+            }
+            .content{
+                height: auto;
+            }
+            .physicist-title{
+                font-size:1.2em;
+            }
+            .lenz-img-experiment{
+                height:125px;
+            }
+            .reference-anchor{
+                font-size:0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="header-menu">           
+            <span class="material-symbols-outlined" id="menu-items__open" >menu</span>
+            <ul class="menu-items">
+                <span class="material-symbols-outlined" id="menu-items__close">close</span>
+                <li class="menu-item"><a class ="menu-item-anchor" href="#">Home</a></li>
+                <li class="menu-item"><a class ="menu-item-anchor" href="#">About</a></li>
+                <li class="menu-item"><a class ="menu-item-anchor" href="#">Contact</a></li>
+            </ul>
+        </nav>       
+    </header>
+    <main class="main-content">
+        <div class="main-title-area">
+            <h1 class="blog-main-title"> Eletromagnetismo </h1>
+        </div>
+        <div class="main-content-text-area">
+            <div class="blog-main-content">
+                <div class="blog-main-content-title-select">
+                    <div class="content-select-area">
+                        <h3 class="content-select-area-title">Experimentos</h3>
+                        <select class="content-select-area-value">
+                            <option class="content-option-value" value="option-1">Oersted</option>
+                            <option class="content-option-value" value="option-2">Faraday</option>
+                            <option class="content-option-value" value="option-3">Lenz</option>                    
+                        </select>
+                    </div>
+                    <h2 class="physicist-title">Hans Christian Oersted<br>(1777 - 1851)</h2>
+                    <h2 class="physicist-title">Michael Faraday<br>(1791 - 1867)</h2>
+                    <h2 class="physicist-title">Heinrich Friedrich Emil Lenz<br>(1804 – 1865)</h2>
+                </div>                      
+                <div class="oersted-text-area content">
+                    <h3 class="experiment-title">Experimento de Oersted</h3>
+                    <p>No ano de 1820, foi anunciado um experimento, realizado pelo físico Hans Christian Oersted, que constatou a ligação entre a eletricidade e o magnetismo. O dinamarquês Hans Christian Oersted (1777-1851) percebeu que a agulha imantada de uma bússola sofria deflexões quando estava próxima a um fio condutor por onde passava uma corrente elétrica. Oersted reparou que a agulha da bússola apontava normalmente para o norte geográfico quando o circuito estava desligado, porém, era defletida quando a corrente elétrica fluía pelo fio.</p>
+                    <figure class="oersted-img-area">
+                        <img src="./img/oersted-experiment.jpg" alt="Oersted's experiment" class="oersted-img-experiment"/>
+                        <figcaption class="oersted-legend-experiment">Campo elétrico gerando campo magnético e mudando direção da bússola</figcaption>
+                    </figure>
+                    <p>A única possibilidade para a mudança de direção da agulha da bússola era a presença de um campo magnético diferente daquele provocado pela Terra. A conclusão de Oersted foi que cargas elétricas em movimento eram capazes de criar campo magnético. Um fio que conduz corrente elétrica atua como um ímã!</p>
+                    <div class="audio-area">
+                        <h4>Podcast sobre Oersted</h4>
+                        <audio src="audio/oersted.mp4" controls class="audio-controls"></audio>
+                    </div>                  
+                    <p class="reference-paragraph">Fonte: <a href="https://mundoeducacao.uol.com.br/fisica/experimento-oersted.htm" target="_blank" class="reference-anchor">mundoeducacao.uol.com.br/fisica/experimento-oersted.htm</a></p>
+                </div>
+                <div class="faraday-text-area content">
+                    <h3 class="experiment-title">Experimento de Faraday</h3>
+                    <p>Para a bobina faz-se um enrolamento de fios de cobre esmaltados ou fios de fiação elétrica residencial. O ímã pode ser retirado de um auto-falante sucateado, de potencia média ou alta, como os de toca CD’s. Usa-se um multímetro que será ajustado na função microampère, dependendo da quantidade de espiras da bobina e do potencial do ímã. Conecta-se os terminais do multímetro nas duas extremidades do enrolamento de fios de cobre. Observa-se o comportamento do ponteiro do multímetro.
+                    </p>
+                    <p>A experiência de Faraday é de extrema importância para o estudo do eletromagnetismo, pois baseado na análise da interação entre campo elétrico e magnético podem ser explicado muitos outros fenômenos relacionados a esta importante parte da Física.</p>
+                    <p>Michael Faraday (1791-1867) nasceu em Londres, na Inglaterra em 22/09/1791. Terceiro filho de um ferreiro de Newington, subúrbio de Londres, foi obrigado a abandonar os estudos para se dedicar ao trabalho aos treze anos. Trabalhou para o livreiro G. Ribeau. Neste intervalo de tempo, aproveitou o contato com os livros para estudar.
+                    Em algumas experiências, Faraday percebeu que ao introduzir um ímã em uma bobina esta acusava a presença de uma corrente elétrica na mesma. Este fenômeno foi caracterizado qualitativamente e quantitativamente e deu origem à Lei da Indução de Faraday que é expressa matematicamente como:</p>
+                    <figure class="faraday-img-area">
+                        <img src="./img/faraday-formula.jpg" alt="Faraday's formula" class="faraday-img-experiment"/>
+                        <figcaption class="faraday-legend-experiment">Relação entre a variação do fluxo magnético e a tensão induzida</figcaption>
+                    </figure>
+                    <p>Ou seja, a intensidade da força eletromotriz induzida (ε) é igual a variação do fluxo magnético no interior da espira. Esta é uma das quatro equações de Maxwell para o Eletromagnetismo.</p>
+                    <p>Mas a unidade de indutância no SI é o henry (abreviação H) em homenagem ao americano Joseph Henry embora tenha publicado seus resultados para a indutância um pouco mais tarde que Faraday.</p>
+                    <p>Faraday introduziu o conceito de campo de força ou simplesmente campo. Mesmo sem ter recebido instrução escolar completa, Faraday recebeu o Diploma Honorário da Universidade de Oxford em 1832. Ainda recebeu logo em seguida a medalha de Copley da Royal Instituição.</p>
+                    <p>Em 1837 o físico percebeu que quando um capacitor recebe menos carga quando há vácuo entre as armaduras do que quando há um dielétrico entre elas. Então a unidade de capacitância foi chamada de farad (abreviação F) em homenagem a ele. 21 anos depois, começou a sofrer com uma doença que causava perda temporária de memória e acabou se afastando da vida pública.</p>
+                    <p>A partir de 1862, passou a maior parte de seu tempo em casa, onde veio a falecer em 25/08/1867. Einstein e Maxwell se apoiaram em seu trabalho para desenvolver o estudo do Eletromagnetismo e da Física Moderna.</p>
+                    <p class="reference-paragraph">Fonte: <a href="https://www.infoescola.com/fisica/lei-de-inducao-de-michael-faraday/" target="_blank" class="reference-anchor">https://www.infoescola.com/fisica/lei-de-inducao-de-michael-faraday/</a></p>
+                </div>
+                <div class="lenz-text-area content">
+                    <h3 class="experiment-title">Experimento de Lenz</h3>
+                    <p>A lei de Lenz foi estabelecida pelo físico russo Heinrich Lenz. Contribuindo com uma outra lei que já existia: a lei de Faraday. A lei de Lenz atribuiu um novo sentido à lei de Faraday ao levar em conta o princípio de conservação da energia.</p>
+                    <p>A lei da indução eletromagnética havia sido descoberta por Michael Faraday em 1831. De acordo com essa lei, um fluxo magnético variável é capaz de produzir uma corrente elétrica induzida no interior de um condutor fechado, como fios, placas metálicas, espiras ou bobinas metálicas.</p>
+                    <p>A lei de Lenz considerou que o sentido da corrente elétrica induzida nos condutores fosse tal que o campo magnético gerado por essa corrente deveria opor-se à variação do fluxo magnético.</p>
+                    <p>Tal enuncia que, quando houver uma variação de fluxo magnético sobre um condutor fechado, surgirá, nesse condutor, um campo magnético que se oporá a tal variação. Essa lei é uma consequência direta de um princípio da física conhecido como conservação da energia e complementa a lei de indução de Faraday.
+                    </p>
+                    <figure class="lenz-img-area">
+                        <img src="./img/lenz-experiment.jpg" alt="Lenz's experiment" class="lenz-img-experiment"/>
+                        <figcaption class="lenz-legend-experiment">Indução de campo magnético oposto ao do ímã</figcaption>
+                    </figure>
+                    <p>A conclusão de Lenz foi baseada na ideia de que não é possível produzir energia elétrica à vontade, para fazê-lo, uma certa quantidade de energia precisaria ser consumida. Essa energia consumida, por sua vez, é equivalente ao trabalho necessário para aproximar ou afastar um ímã de uma espira condutora, uma vez que o movimento relativo entre ímã e espira dá origem a uma força que se opõe ao movimento.</p>
+                    <p class="reference-paragraph">Fonte: <a href="https://brasilescola.uol.com.br/fisica/a-lei-lenz.htm" target="_blank" class="reference-anchor">https://brasilescola.uol.com.br/fisica/a-lei-lenz.htm</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script>
+        var menuArea = $(".menu-items");
+        var windowWidth = $(window).width();
+        var menuWidth = menuArea.width();
+        var closeButtonIsHide = true;
+        var lastValue = 0
+
+        document.addEventListener('touchmove', (event) => {
+            !closeButtonIsHide? event.preventDefault():"";
+        }
+        , { passive: false });
+
+        document.addEventListener('wheel', (event) => {
+            !closeButtonIsHide? event.preventDefault():"";
+        }, { passive: false });
+
+        $(".content").each((index, element) => {
+            index? $(element).hide():$(element).show();
+            index? $(element).css('opacity', '0'):$(element).css('opacity', '1');
+        })
+
+        $(".physicist-title").each((index, element) => {
+            index? $(element).hide():$(element).show();
+            index? $(element).css('opacity', '0'):$(element).css('opacity', '1');
+        })
+        
+        $("#menu-items__open").click(() => {           
+            $("#menu-items__close").show();
+            menuArea.css({left:`${windowWidth - menuWidth}px`});
+            closeButtonIsHide = false;
+        });
+
+        $("#menu-items__close").click(() => {
+            menuArea.css("left", "100%");
+            closeButtonIsHide = true;
+        });
+ 
+        $(window).resize(() => {
+            if($(window).width() >= 633){
+                $("#menu-items__close").hide();
+            }
+            if($(window).width() <= 706 && $(window).width() < lastValue){
+                menuArea.css("left", "100%");
+            }
+            if(!closeButtonIsHide){
+                menuArea.css("left", "100%");
+            }
+            lastValue = $(window).width();
+            windowWidth = $(window).width();
+            menuWidth = menuArea.width();
+            closeButtonIsHide = true; 
+        }); 
+
+        $(".content-select-area-value").change(function(){
+            let physicistsNames = $(".physicist-title")
+            let selectRef = Array.from(this.value)[this.value.length - 1];
+            $(".content").each((index, element) =>{
+                if(index + 1 == selectRef){
+                    $(element).show();
+                    $(element).css('opacity', '1');
+                    $(physicistsNames[index]).show()
+                    $(physicistsNames[index]).css('opacity', '1');
+                }
+                else{
+                    $(element).hide();
+                    $(element).css('opacity', '0');
+                    $(physicistsNames[index]).hide()
+                    $(physicistsNames[index]).css('opacity', '0');
+                }
+            })               
+        })   
+    </script>
+</body>
+</html>
